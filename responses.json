@@ -1,0 +1,20 @@
+[
+	{
+		"name":"test",
+		"scheme":"Test",
+		"resp":"Received",
+	},
+	{
+		"name":"currentTime",
+		"scheme":"!time",
+		"resp":"`Time: ${new Date().getHours()}:${new Date().getMinutes()}`"
+	},
+	{
+		"name":"test1",
+		"scheme":"\\w*",
+		"resp":"Test"
+	},
+	{
+
+	}
+]

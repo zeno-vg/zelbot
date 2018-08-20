@@ -1,0 +1,71 @@
+[
+	{
+		"name":"Test command (Message)",
+		"scheme":"!test$",
+		"resp":"%mTest Message Recieved"
+	},
+	{
+		"name":"currentTime local",
+		"scheme":"!time$",
+		"resp":"%sm`The current time in Lincoln is: ${new Date().toLocaleTimeString('en-US',{hour12:false})}`"
+	},
+	{
+		"name":"Current Time, input timezone",
+		"scheme":"!(?:time|timez) (([A-Za-z]+)\/([a-zA-Z|_]+))$",
+		"resp":"%sm`The current time in ${params[2].replace('_',' ')} is: ${new Date().toLocaleTimeString('en-US',{timeZone:params[0],hour12:false})}`"
+	},
+	{
+		"name":"id",
+		"scheme":"!id",
+		"resp":"%sm`User ${msg.author.username} has a id of ${msg.author.id}`"
+	},
+	{
+		"name":"quote",
+		"scheme":"!quote(?:$| ([0-9]+))$",
+		"resp":"%sm((quote)=>`\"${quote.split(' -')[0]}\" - ${quote.split(' -')[1]}`)(quoteList[typeof params[0]!=='undefined' && params[0]<quoteList.length?params[0]:Math.floor(Math.random()*quoteList.length)])"
+	},
+	{
+		"name":"Bhavin's Art",
+		"scheme":"Bhavin's art is lovely!",
+		"resp":"%mDid you mean to say \"Bhavin's art is lurid!\"\nhttps://www.dictionary.com/browse/lurid"
+	},
+	{
+		"name":"Avatar URL",
+		"scheme":"!(?:avatar|avatarURL)$",
+		"resp":"%sm`${msg.author.avatarURL}`"
+	},
+	{
+		"name":"TicTacToe Start Game Command",
+		"scheme":"!(?:tictac|tictactoe) start ([0-9]{18}) ([0-9]{18})$",
+		"resp":"%rtictacSession=new TicTacGame(getUserById(params));",
+		"disabled":false
+	},
+	{
+		"name":"TicTacToe Place command",
+		"scheme":"!(?:tictac|tictactoe) place ((?: |))[0-2],[0-2]$",
+		"resp":"%r(tempFileName=>{(placeMsg=>{placeMsg.boardImage.write(`${config.tempFileUpladDir}/${tempFileName}.png`,()=>{msg.channel.send(placeMsg.win?`Player ${tictacSession.nonCurrentPlayer().name} won`:'',{files:[(`${config.tempFileUpladDir}/${tempFileName}.png`)]})});})(tictacSession.place(msg))})(Date.now())",
+		"disabled":false
+	},
+	{
+		"name":"TicTacToe Reset command",
+		"scheme":"!(?:tictac|tictactoe) (?:reset|restart)$",
+		"resp":"%rtictacSession.resetGame().then((err)=>{err?console.error(err):console.log(`Game has been successfully reset.`)});",
+		"disabled":false
+	},
+	{
+		"name":"Bhavin Avatar",
+		"scheme":"!(?:bhavin|acutely|cutely)(?:| )(?:avatar|ava)$",
+		"resp":"%mDid you know that <@249743534331133952>'s avatar is the avatar of a Hentai Site?\nhttps://imgur.com/a/Hc3hONv",
+		"disabled":false
+	},
+	{
+		"name":"test",
+		"scheme":"!testing$",
+		"resp":"%r((test)=>console.log(`testing ${test}`))('test')"
+	},
+	{
+		"name":"nocmd",
+		"scheme":"!.+",
+		"resp":"%rENV=='testing'?console.log(`Matching command not found for ${msg}`):(()=>{})()"
+	}
+]
