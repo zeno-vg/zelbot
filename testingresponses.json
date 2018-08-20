@@ -64,6 +64,11 @@
 		"resp":"%r((test)=>console.log(`testing ${test}`))('test')"
 	},
 	{
+		"name":"Github Source",
+		"scheme":"!gitsource",
+		"resp":"mhttps://github.com/zeno-vg/zelbot"
+	},
+	{
 		"name":"nocmd",
 		"scheme":"!.+",
 		"resp":"%rENV=='testing'?console.log(`Matching command not found for ${msg}`):(()=>{})()"
